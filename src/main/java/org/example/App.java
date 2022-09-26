@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.model.City;
 import org.example.model.Country;
+import org.example.model.MyException;
 import org.example.model.People;
 import org.example.util.Db;
 
@@ -46,6 +47,8 @@ public class App {
 
         List<City> allCities = getAllCities();
         System.out.println(allCities);
+
+        System.out.println(getByIdCity(2));
 
 
     }
@@ -250,6 +253,23 @@ public class App {
         }
         return cities;
     }
+
+    public static City getByIdCity(int id) {
+
+        City city = null;
+
+        for (City c : getAllCities()) {
+            if (c.getId() == id) {
+                city = c;
+            }
+        }
+        if (city == null) {
+            throw new MyException ("Такого id нет");
+        } else {
+            return city;
+        }
+    }
+
 
 }
 
